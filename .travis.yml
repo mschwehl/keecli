@@ -1,0 +1,31 @@
+sudo: false
+
+language: java
+
+# use Java 8
+jdk:
+- oraclejdk8
+
+# cache the build tool's caches
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.gradle
+  
+before_deploy:
+  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+
+deploy:
+     provider: releases
+     api_key:
+         secure: $GITHUB-API-KEY
+     file: 
+         - keecli-$project_version-jar-with-dependencies.jar
+
+     skip_cleanup: true
+     on:
+         repo: mschwehl/keecmd
+         tags: true
+	 name: $project_version
+
