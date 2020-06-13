@@ -4,31 +4,30 @@ language: java
 
 # use Java 8
 jdk:
-- openjdk8
+  - openjdk8
 
 # cache the build tool's caches
 cache:
   directories:
   - $HOME/.m2
   - $HOME/.gradle
-  
-git:
-  depth: 10
-  
+   
 before_deploy:
   - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
   - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
 
 deploy:
-     provider: releases
-     api_key: $GITHUB-API-KEY
-     file: 
-         - keecli-$project_version-jar-with-dependencies.jar
+  provider: releases
+  api_key: $GITHUB-API-KEY
+  file: 
+  - keecli-$project_version-jar-with-dependencies.jar
 
-     skip_cleanup: true
-     on:
-         repo: mschwehl/keecli 
-         tags: true
-		 
+  skip_cleanup: true
+  on:
+    repo: mschwehl/keecli 
+    tags: true
+    branch: master
+
 name: $project_version
+
 
