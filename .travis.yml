@@ -27,23 +27,23 @@ script:
   - if [ -z $SEMVER_LAST_TAG ]; then >&2 echo "No tags defined"; SEMVER_LAST_TAG="0.0.1"; fi;
   - echo mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER}
   - mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumber=${TRAVIS_BUILD_NUMBER}
-  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
-  - echo ${project_version}
+  - export KEECLI_VERSION=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+  - echo ${KEECLI_VERSION}
   - echo $(pwd)
   - ls ./target -lars
-  - echo cp ./target/*with-dependencies.jar ./keecli-${project_version}.jar 
-  - cp ./target/*with-dependencies.jar ./keecli-${project_version}.jar 
+  - echo "cp ./target/*with-dependencies.jar ./keecli-${KEECLI_VERSION}.jar"
+  - cp ./target/*with-dependencies.jar "./keecli-${KEECLI_VERSION}.jar"
   - ls -lars
-  - ./buildnative.bat ./keecli-${project_version}.jar ./keecli
+  - ./buildnative.bat ./keecli-${KEECLI_VERSION}.jar ./keecli
   - cp /c/Windows/System32/VCRUNTIME140.dll .
-  - zip keecli-${project_version}.zip keecli.exe VCRUNTIME140.dll
+  - zip keecli-${KEECLI_VERSION}.zip keecli.exe VCRUNTIME140.dll
 
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
   file:
-    - keecli-${project_version}.zip
-    - keecli-${project_version}.jar
+    - keecli-${KEECLI_VERSION}.zip
+    - keecli-${KEECLI_VERSION}.jar
   skip_cleanup: true
   on:
     branch: master
