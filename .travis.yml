@@ -29,7 +29,8 @@ script:
   - mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER}
   - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
   - echo ${project_version}
-  - ls ./target --lars
+  - echo $(pwd)
+  - ls ./target -lars
   - echo cp ./target/*with-dependencies.jar ./keecli-${project_version}.jar 
   - cp ./target/*with-dependencies.jar ./keecli-${project_version}.jar 
   - ls -lars
