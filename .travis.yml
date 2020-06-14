@@ -30,7 +30,7 @@ script:
   - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
   - echo ${project_version}
   - cp ./target/*dependencies.jar ./keecli-${project_version}.jar 
-  - ls lars
+  - ls -lars
   - ./buildnative.bat ./keecli-${project_version}.jar ./keecli
   - cp /c/Windows/System32/VCRUNTIME140.dll .
   - zip keecli-${project_version}.zip keecli.exe VCRUNTIME140.dll
