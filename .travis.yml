@@ -27,9 +27,8 @@ script:
   - if [ -z $SEMVER_LAST_TAG ]; then >&2 echo "No tags defined"; SEMVER_LAST_TAG="0.0.1"; fi;
   - echo mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER}
   - mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumber=${TRAVIS_BUILD_NUMBER}
-  - KEECLI_VERSION=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+  - KEECLI_VERSION=$(mvn help:evaluate -N -Dexpression=project.version -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER} |grep -v '\[' | xargs)
   - echo ${KEECLI_VERSION}
-  - KEECLI_VERSION=0.5.0
   - echo $(pwd)
   - ls ./target -lars
   - echo "cp ./target/*with-dependencies.jar ./keecli-${KEECLI_VERSION}.jar"
