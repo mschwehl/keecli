@@ -29,7 +29,9 @@ script:
   - mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER}
   - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
   - echo ${project_version}
-  - cp ./target/*dependencies.jar ./keecli-${project_version}.jar 
+  - ls ./target --lars
+  - echo cp ./target/*with-dependencies.jar ./keecli-${project_version}.jar 
+  - cp ./target/*with-dependencies.jar ./keecli-${project_version}.jar 
   - ls -lars
   - ./buildnative.bat ./keecli-${project_version}.jar ./keecli
   - cp /c/Windows/System32/VCRUNTIME140.dll .
