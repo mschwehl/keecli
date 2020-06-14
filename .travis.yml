@@ -38,8 +38,8 @@ deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
   file:
-    - keecli-$project_version.zip
-    - keecli-$project_version.jar
+    - keecli-${project_version}.zip
+    - keecli-${project_version}.jar
   skip_cleanup: true
   on:
     branch: master
