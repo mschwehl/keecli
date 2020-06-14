@@ -16,25 +16,28 @@ before_install:
   - "source $HOME/.sdkman/bin/sdkman-init.sh"
 
 install:
-  - sdk install java 20.0.0.r11-grl
+  - (sdk install java 20.0.0.r11-grl) || true
   - gu.cmd install native-image
   - native-image.cmd --version
-  - sdk install maven
+  - (sdk install maven) || true
 
 script:
-  - chmod u+x /bash/semver.sh
-  - . ./bash/semver.sh
+  - (chmod +x ./bash/semver.sh) || true
+  - (. ./bash/semver.sh) || true
   - mvn install -Dmaven.skip.deploy=true -Drevision=$SEMVER_LAST_TAG -DbuildNumer=$TRAVIS_BUILD_NUMBER
   - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
-  - find target -iname "*dependencies.jar" -exec mv {} ./keecli-$(echo project_version).jar  \;
-  - ./buildnative.bat ./keecli-$(echo project_version).jar ./keecli
+  - find target -iname "*dependencies.jar" -exec mv {} ./keecli-$project_version.jar  \;
+  - ./buildnative.bat ./keecli-$project_version.jar ./keecli
   - cp /c/Windows/System32/VCRUNTIME140.dll .
-  - zip keecli-$(echo project_version).zip keecli.exe VCRUNTIME140.dll
+  - zip keecli-$project_version.zip keecli.exe VCRUNTIME140.dll
 
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
-  file: keecli-$(echo project_version).zip
+  file:
+    - keecli-$project_version.zip
+    - keecli-$project_version.jar
   skip_cleanup: true
   on:
+    branch: master
     tags: true
