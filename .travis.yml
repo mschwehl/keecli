@@ -16,10 +16,10 @@ before_install:
   - "source $HOME/.sdkman/bin/sdkman-init.sh"
 
 install:
-  - (sdk install java 20.0.0.r11-grl) || true
+  - sdk install java 20.0.0.r11-grl
   - gu.cmd install native-image
   - native-image.cmd --version
-  - (sdk install maven) || true
+  - sdk install maven
 
 script:
   - (chmod +x ./bash/semver.sh) || true
