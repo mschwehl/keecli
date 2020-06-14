@@ -24,12 +24,14 @@ install:
 script:
   - (chmod +x ./bash/semver.sh) || true
   - (. ./bash/semver.sh) || true
-  - mvn install -Dmaven.skip.deploy=true -Drevision=$SEMVER_LAST_TAG -DbuildNumer=$TRAVIS_BUILD_NUMBER
+  - echo mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER}
+  - mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER}
   - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+  - echo $project_version
   - find target -iname "*dependencies.jar" -exec mv {} ./keecli-$project_version.jar  \;
-  - ./buildnative.bat ./keecli-$project_version.jar ./keecli
+  - ./buildnative.bat ./keecli-${project_version}.jar ./keecli
   - cp /c/Windows/System32/VCRUNTIME140.dll .
-  - zip keecli-$project_version.zip keecli.exe VCRUNTIME140.dll
+  - zip keecli-${project_version}.zip keecli.exe VCRUNTIME140.dll
 
 deploy:
   provider: releases
