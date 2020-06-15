@@ -16,10 +16,10 @@ before_install:
   - "source $HOME/.sdkman/bin/sdkman-init.sh"
 
 install:
-  - sdk install java 20.0.0.r11-grl
-  - gu.cmd install native-image
-  - native-image.cmd --version
-  - sdk install maven
+  - sdk install java 20.0.0.r11-grl || true
+  - gu.cmd install native-image  || true
+  - native-image.cmd --version  || true
+  - sdk install maven  || true
 
 script:
   - mvn clean
@@ -28,11 +28,8 @@ script:
   - echo mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER}
   - mvn install -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumber=${TRAVIS_BUILD_NUMBER}
   - KEECLI_VERSION=$(mvn help:evaluate -N -Dexpression=project.version -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER} |grep -v '\[' | xargs)
-  - echo ${KEECLI_VERSION}
-  - echo $(pwd)
-  - ls ./target -lars
-  - echo "cp ./target/*with-dependencies.jar ./keecli-${KEECLI_VERSION}.jar"
-  - cp ./target/*with-dependencies.jar "./keecli-${KEECLI_VERSION}.jar"
+  - echo "<${KEECLI_VERSION}>"
+  - find target -name "*dependencies.jar" -exec mv {} keecli-${KEECLI_VERSION}.jar \;
   - ls -lars
   - ./buildnative.bat ./keecli-${KEECLI_VERSION}.jar ./keecli
   - cp /c/Windows/System32/VCRUNTIME140.dll .
