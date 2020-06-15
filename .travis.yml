@@ -30,6 +30,10 @@ script:
   - KEECLI_VERSION=$(mvn help:evaluate -N -Dexpression=project.version -Dmaven.skip.deploy=true -Drevision=${SEMVER_LAST_TAG} -DbuildNumer=${TRAVIS_BUILD_NUMBER} |grep -v '\[' | xargs)
   - KEECLI_VERSION=${KEECLI_VERSION}-${TRAVIS_BUILD_NUMBER}
   - echo "${KEECLI_VERSION}"
+  - find target -name "*dependencies.jar" 
+  - echo iname
+  - find target -iname "*dependencies.jar" 
+  - echo keecli-${KEECLI_VERSION}.jar
   - find target -name "*dependencies.jar" -exec mv {} keecli-${KEECLI_VERSION}.jar \;
   - ls ./target -lars
   - ls -lars
