@@ -25,6 +25,9 @@ public class Arguments {
     @Parameter(names = {"--version","-v" ,"-h" , "--help"} , help = true)
     private boolean version;
 
+    @Parameter()
+    private String mainParameter;
+        
     /**
      * @return the query
      */
@@ -120,6 +123,20 @@ public class Arguments {
     
     public boolean isTargetClipboard() {
         return ETarget.clipboard.equals(target);
+    }
+
+    /**
+     * @return the mainParameter
+     */
+    public String getMainParameter() {
+        return mainParameter;
+    }
+
+    /**
+     * @param mainParameter the mainParameter to set
+     */
+    public void setMainParameter(String mainParameter) {
+        this.mainParameter = mainParameter;
     }
         
 }

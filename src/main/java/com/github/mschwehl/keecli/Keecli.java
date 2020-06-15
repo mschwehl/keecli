@@ -38,13 +38,19 @@ public class Keecli {
 
         final Arguments keeArgs = new Arguments();
 
-        JCommander.newBuilder()
+            JCommander.newBuilder()
                 .addObject(keeArgs)
                 .addConverterFactory(new QueryParameterFactory())
                 .build()
                 .parse(args);
 
-        if (keeArgs.isVersion()) {
+        // Graal-native: No required-check is applied
+        if (keeArgs == null
+                || keeArgs.isVersion() 
+                || keeArgs.getMainParameter() != null
+                || keeArgs.getDbPassword() == null
+                || keeArgs.getDbPath() == null
+                || keeArgs.getTarget() == null) {
             System.out.println("usage: java -jar keecli.jar -q username:test -o field:password -t clipboard -dbPassword xxx -dbPath /usr/kee.kdbx");
             System.out.println("       java -jar keecli.jar -o path:username -dbPassword xxx -dbPath /usr/kee.kdbx");
             System.out.println("       -q query: filter elements by paht or attribute -o: outputfilter e.g. by fieldname, -t console or clipboard");
@@ -84,11 +90,12 @@ public class Keecli {
 
                     case clipboard:
 
-                        System.out.println("content copied to clipboard");
                         StringSelection selection = new StringSelection(result);
                         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                         clipboard.setContents(selection, selection);
 
+                        System.out.println("content copied to clipboard");
+                        
                         break;
 
                     case console:

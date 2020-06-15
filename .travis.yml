@@ -38,13 +38,13 @@ script:
   - ls -lars
   - ./buildnative.bat ./keecli-${KEECLI_VERSION}.jar ./keecli
   - cp /c/Windows/System32/VCRUNTIME140.dll .
-  - zip keecli-${KEECLI_VERSION}.zip keecli.exe VCRUNTIME140.dll
+  - zip keecli-${KEECLI_VERSION}-windows.zip keecli.exe VCRUNTIME140.dll
 
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
   file:
-    - keecli-${KEECLI_VERSION}.zip
+    - keecli-${KEECLI_VERSION}-windows.zip
     - keecli-${KEECLI_VERSION}.jar
   skip_cleanup: true
   on:
