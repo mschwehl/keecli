@@ -1,0 +1,35 @@
+[
+{
+  "name":"boolean",
+  "allDeclaredFields":true
+},
+{
+  "name":"com.beust.jcommander.converters.BooleanConverter",
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.beust.jcommander.validators.NoValidator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.beust.jcommander.validators.NoValueValidator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.pluta.graal.cli.Args",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.io.Console",
+  "methods":[{"name":"writer","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.System",
+  "methods":[{"name":"console","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.Throwable",
+  "methods":[{"name":"addSuppressed","parameterTypes":["java.lang.Throwable"] }]
+}
+]

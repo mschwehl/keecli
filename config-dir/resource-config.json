@@ -1,0 +1,8 @@
+{
+  "resources":[
+    {"pattern":"META-INF/services/jdk.vm.ci.hotspot.HotSpotJVMCIBackendFactory"}, 
+    {"pattern":"META-INF/services/jdk.vm.ci.services.JVMCIServiceLocator"}, 
+    {"pattern":"sun/net/idn/uidna.spp"}, 
+    {"pattern":"sun/text/resources/unorm.icu"}
+  ]
+}

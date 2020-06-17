@@ -24,5 +24,8 @@ the java-app will read the database in memory so no modification is possible and
 # credits
 this is a wrapper to org.linguafranca.pwdb.KeePassJava2 using com.beust.jcommander
 
+graal-vm 
+ - https://msitko.pl/blog/2020/03/05/native-image-on-windows.html
 
-
+using jcommander with graal-vm
+- jramirez-isc/graalvm-cli
