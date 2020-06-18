@@ -2,6 +2,7 @@
   "resources":[
     {"pattern":"META-INF/services/jdk.vm.ci.hotspot.HotSpotJVMCIBackendFactory"}, 
     {"pattern":"META-INF/services/jdk.vm.ci.services.JVMCIServiceLocator"}, 
+	{"pattern":"META-INF/maven/com.github.mschwehl/keecli/pom.properties"}, 
     {"pattern":"sun/net/idn/uidna.spp"}, 
     {"pattern":"sun/text/resources/unorm.icu"}
   ]

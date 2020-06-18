@@ -25,6 +25,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.function.Function;
+
 import java.util.stream.Collectors;
 
 
@@ -34,6 +35,15 @@ import java.util.stream.Collectors;
  */
 public class Keecli {
 
+    static String VERSION ;
+    static {
+        try {
+            VERSION=getVersionNameFromManifest();
+        } catch (IOException ex) {
+            VERSION="UNKNOWN";
+        }
+    }
+    
     public static void main(String[] args) throws Exception {
 
         final Arguments keeArgs = new Arguments();
@@ -53,8 +63,8 @@ public class Keecli {
                 || keeArgs.getTarget() == null) {
             System.out.println("usage: java -jar keecli.jar -q username:test -o field:password -t clipboard -dbPassword xxx -dbPath /usr/kee.kdbx");
             System.out.println("       java -jar keecli.jar -o path:username -dbPassword xxx -dbPath /usr/kee.kdbx");
-            System.out.println("       -q query: filter elements by paht or attribute -o: outputfilter e.g. by fieldname, -t console or clipboard");
-            System.out.println("version: " + getVersionNameFromManifest());
+            System.out.println("       -q query: filter elements by path or attribute -o: outputfilter e.g. by fieldname, -t console or clipboard");
+            System.out.println("version: " + VERSION);
             
             return; 
         }
