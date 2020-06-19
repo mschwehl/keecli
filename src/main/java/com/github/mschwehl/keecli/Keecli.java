@@ -28,6 +28,7 @@ import java.util.function.Function;
 
 import java.util.stream.Collectors;
 import org.linguafranca.pwdb.kdb.KdbDatabase;
+import org.linguafranca.pwdb.kdbx.dom.DomDatabaseWrapper;
 import org.linguafranca.pwdb.kdbx.jaxb.JaxbDatabase;
 
 
@@ -82,7 +83,7 @@ public class Keecli {
 
         try (InputStream inputStream = bis;) {
 
-            Database database = JaxbDatabase.load(credentials, inputStream);
+            Database database = DomDatabaseWrapper.load(credentials, inputStream);
 
             try {
 
