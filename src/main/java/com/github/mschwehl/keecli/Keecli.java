@@ -9,7 +9,7 @@ import com.github.mschwehl.keecli.cli.Arguments;
 import org.linguafranca.pwdb.Database;
 import org.linguafranca.pwdb.Entry;
 import org.linguafranca.pwdb.kdbx.KdbxCreds;
-import org.linguafranca.pwdb.kdbx.simple.SimpleDatabase;
+
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -27,6 +27,8 @@ import java.util.UUID;
 import java.util.function.Function;
 
 import java.util.stream.Collectors;
+import org.linguafranca.pwdb.kdb.KdbDatabase;
+import org.linguafranca.pwdb.kdbx.jaxb.JaxbDatabase;
 
 
 /**
@@ -80,7 +82,7 @@ public class Keecli {
 
         try (InputStream inputStream = bis;) {
 
-            Database database = SimpleDatabase.load(credentials, inputStream);
+            Database database = JaxbDatabase.load(credentials, inputStream);
 
             try {
 
