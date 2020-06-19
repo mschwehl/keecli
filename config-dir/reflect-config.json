@@ -8,6 +8,10 @@
   "allDeclaredConstructors":true
 },
 {
+  "name":"com.beust.jcommander.converters.EnumConverter",
+  "allDeclaredConstructors":true
+},
+{
   "name":"com.beust.jcommander.validators.NoValidator",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -16,7 +20,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.pluta.graal.cli.Args",
+  "name":"com.github.mschwehl.keecli.cli.Arguments",
   "allDeclaredFields":true,
   "allDeclaredMethods":true
 },
